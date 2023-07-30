@@ -28,6 +28,9 @@ export const GoBackLink = styled(Link)`
   text-decoration: none;
   color: black;
   font-weight: 500;
+  box-shadow: inset rgba(0, 0, 0, 0.5) -3px -3px 8px,
+    inset rgba(255, 255, 255, 0.9) 3px 3px 8px,
+    rgba(0, 0, 0, 0.8) 3px 3px 8px -3px;
 
   &:hover {
     color: white;
@@ -69,6 +72,9 @@ export const MovieLink = styled(NavLink)`
   font-weight: 500;
   margin-bottom: 20px;
   margin-top: 5px;
+  box-shadow: inset rgba(0, 0, 0, 0.5) -3px -3px 8px,
+    inset rgba(255, 255, 255, 0.9) 3px 3px 8px,
+    rgba(0, 0, 0, 0.8) 3px 3px 8px -3px;
 
   &:hover {
     color: white;

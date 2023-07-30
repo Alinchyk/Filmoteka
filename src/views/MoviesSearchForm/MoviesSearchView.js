@@ -6,11 +6,16 @@ import {
   SearchForm,
   SearchInput,
   ListLink,
-  ListItem,
+  Title,
+  Card,
+  Gallery,
+  Poster,
 } from './MoviesSearch.styled';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+const imgUrl = 'https://image.tmdb.org/t/p/w500';
 
 export default function MoviesSearchFormView() {
   const [movies, setMovies] = useState([]);
@@ -60,15 +65,16 @@ export default function MoviesSearchFormView() {
 
       <>
         {movieName && (
-          <ul>
-            {movies.map(({ id, title, name }) => (
-              <ListItem key={id}>
+          <Gallery>
+            {movies.map(({ id, title, name, poster_path }) => (
+              <Card key={id}>
                 <ListLink to={`${id}`} state={{ from: fullPath }}>
-                  {title || name}
+                  <Poster src={`${imgUrl}${poster_path}`} alt={title} />
+                  <Title>{title}</Title>
                 </ListLink>
-              </ListItem>
+              </Card>
             ))}
-          </ul>
+          </Gallery>
         )}
         {movieName && movies.length === 0 && <p>No movies found.</p>}
       </>

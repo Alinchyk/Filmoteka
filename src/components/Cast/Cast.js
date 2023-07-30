@@ -1,4 +1,4 @@
-import { ListItem, List, Section } from './Cast.styled';
+import { ListItem, List, Section, CastImg, CastInfo } from './Cast.styled';
 import blankImage from './blank_profile.png';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
@@ -16,8 +16,8 @@ export default function Cast({ cast }) {
             const imageSRC = profile_path ? IMG_URL + profile_path : blankImage;
             return (
               <ListItem key={id}>
-                <img src={imageSRC} alt={name} width={200} height={300} />
-                <div>
+                <CastImg src={imageSRC} alt={name} />
+                <CastInfo>
                   <p>
                     <span>{name}</span>
                   </p>
@@ -32,7 +32,7 @@ export default function Cast({ cast }) {
                       <span> Unknown</span>
                     </p>
                   )}
-                </div>
+                </CastInfo>
               </ListItem>
             );
           })}
