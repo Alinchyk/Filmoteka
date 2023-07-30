@@ -1,5 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
-import { Title, Card, Gallery } from './MovieList.styled';
+import { Title, Card, Gallery, Poster } from './MovieList.styled';
 
 const imgUrl = 'https://image.tmdb.org/t/p/w500';
 
@@ -8,24 +8,19 @@ export default function MoviesList({ movies }) {
 
   return (
     <>
-      {movies && (
+      {movies.length > 0 ? (
         <Gallery>
           {movies.map(({ id, title, poster_path }) => (
-            <li key={id}>
+            <Card key={id}>
               <Link to={`movies/${id}`} state={{ from: location.pathname }}>
-                <Card>
-                  <img
-                    src={`${imgUrl}${poster_path}`}
-                    alt={title}
-                    width="300"
-                    height="450"
-                  />
-                  <Title>{title}</Title>
-                </Card>
+                <Poster src={`${imgUrl}${poster_path}`} alt={title} />
+                <Title>{title}</Title>
               </Link>
-            </li>
+            </Card>
           ))}
         </Gallery>
+      ) : (
+        <p>No {movies.length > 0 ? 'search' : 'trending'} movies available.</p>
       )}
     </>
   );

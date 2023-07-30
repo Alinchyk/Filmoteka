@@ -27,6 +27,7 @@ export default function MoviesSearchFormView() {
       return;
     }
     setSearchParams(query !== '' ? { query } : {});
+    e.target.movie.value = '';
   };
 
   useEffect(() => {
