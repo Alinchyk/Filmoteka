@@ -52,13 +52,16 @@ export const getReviewsInfo = async movieId => {
   }
 };
 
-export const getMoviesByName = async query => {
+export const getMoviesByName = async (query, pageNumber) => {
   try {
     const { data } = await axios.get(
-      `/search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=1&include_adult=false`
+      `/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${
+        pageNumber ? pageNumber : 1
+      }`
     );
     return data;
   } catch (error) {
     console.error('Error while searching movies:', error);
+    throw error;
   }
 };

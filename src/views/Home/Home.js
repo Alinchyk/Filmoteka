@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { getTrendingMovies } from 'components/services/moviesApi';
 import MoviesList from 'components/MoviesList/MoviesList';
-import { HomeTitle } from './Home.styled';
 import PaginationButtons from 'components/Pagination/Pagination';
+import { HomeTitle } from './Home.styled';
 
 export default function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -26,6 +26,7 @@ export default function Home() {
   return (
     <>
       <HomeTitle>Trending today</HomeTitle>
+
       <MoviesList movies={trendingMovies} />
       <PaginationButtons
         currentPage={currentPage}

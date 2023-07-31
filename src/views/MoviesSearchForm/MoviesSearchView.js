@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getMoviesByName } from 'components/services/moviesApi';
+import PaginationButtons from 'components/Pagination/Pagination';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   SearchButton,
   SearchForm,
@@ -11,18 +15,18 @@ import {
   Gallery,
   Poster,
 } from './MoviesSearch.styled';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const imgUrl = 'https://image.tmdb.org/t/p/w500';
 
 export default function MoviesSearchFormView() {
   const [movies, setMovies] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(1);
   const location = useLocation();
-  const fullPath = location.pathname + location.search;
-  const movieName = searchParams.get('query');
+  const navigate = useNavigate();
+  const [totalPages, setTotalPages] = useState(0);
+
+  const queryParams = new URLSearchParams(location.search);
+  const movieName = queryParams.get('query');
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -31,22 +35,32 @@ export default function MoviesSearchFormView() {
       toast.error('Enter the query correctly...', { theme: 'colored' });
       return;
     }
-    setSearchParams(query !== '' ? { query } : {});
+    queryParams.set('query', query);
+    queryParams.delete('page');
+    navigate(`?${queryParams.toString()}`, { replace: true });
     e.target.movie.value = '';
   };
 
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const movies = await getMoviesByName(movieName);
-        setMovies(movies.results);
+        const response = await getMoviesByName(movieName, currentPage);
+        const { results, total_pages } = response;
+        setMovies(results);
+        setTotalPages(total_pages);
       } catch (error) {
         console.error('Error while searching:', error);
       }
     };
 
     fetchdata();
-  }, [movieName]);
+  }, [movieName, currentPage]);
+
+  const handlePageChange = pageNumber => {
+    setCurrentPage(pageNumber);
+    queryParams.set('page', pageNumber);
+    navigate(`?${queryParams.toString()}`, { replace: true });
+  };
 
   return (
     <div>
@@ -65,16 +79,26 @@ export default function MoviesSearchFormView() {
 
       <>
         {movieName && (
-          <Gallery>
-            {movies.map(({ id, title, name, poster_path }) => (
-              <Card key={id}>
-                <ListLink to={`${id}`} state={{ from: fullPath }}>
-                  <Poster src={`${imgUrl}${poster_path}`} alt={title} />
-                  <Title>{title}</Title>
-                </ListLink>
-              </Card>
-            ))}
-          </Gallery>
+          <>
+            <Gallery>
+              {movies.map(({ id, title, name, poster_path }) => (
+                <Card key={id}>
+                  <ListLink
+                    to={`${id}`}
+                    state={{ from: location.pathname + location.search }}
+                  >
+                    <Poster src={`${imgUrl}${poster_path}`} alt={title} />
+                    <Title>{title}</Title>
+                  </ListLink>
+                </Card>
+              ))}
+            </Gallery>
+            <PaginationButtons
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </>
         )}
         {movieName && movies.length === 0 && <p>No movies found.</p>}
       </>

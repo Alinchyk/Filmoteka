@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button, PaginationButtonsContainer } from './Pagination.styled';
 
-const PaginationButtons = ({ currentPage, totalPages, onPageChange }) => {
+export default function PaginationButtons({
+  currentPage,
+  totalPages,
+  onPageChange,
+}) {
   const handlePageChange = pageNumber => {
     onPageChange(pageNumber);
   };
@@ -67,6 +71,4 @@ const PaginationButtons = ({ currentPage, totalPages, onPageChange }) => {
       </Button>
     </PaginationButtonsContainer>
   );
-};
-
-export default PaginationButtons;
+}
