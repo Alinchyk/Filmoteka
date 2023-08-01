@@ -28,6 +28,13 @@ export default function MoviesSearchFormView() {
   const queryParams = new URLSearchParams(location.search);
   const movieName = queryParams.get('query');
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     const query = e.target.movie.value;
@@ -48,6 +55,7 @@ export default function MoviesSearchFormView() {
         const { results, total_pages } = response;
         setMovies(results);
         setTotalPages(total_pages);
+        scrollToTop();
       } catch (error) {
         console.error('Error while searching:', error);
       }
@@ -81,7 +89,7 @@ export default function MoviesSearchFormView() {
         {movieName && (
           <>
             <Gallery>
-              {movies.map(({ id, title, name, poster_path }) => (
+              {movies.map(({ id, title, poster_path }) => (
                 <Card key={id}>
                   <ListLink
                     to={`${id}`}

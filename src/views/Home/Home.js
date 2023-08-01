@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getTrendingMovies } from 'components/services/moviesApi';
 import MoviesList from 'components/MoviesList/MoviesList';
 import PaginationButtons from 'components/Pagination/Pagination';
@@ -9,19 +9,27 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchData = useCallback(async () => {
-    try {
-      const response = await getTrendingMovies(currentPage);
-      setTrendingMovies(response.results);
-      setTotalPages(response.total_pages);
-    } catch (error) {
-      console.error('Error while fetching trending movies:', error);
-    }
-  }, [currentPage]);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    const fetchdata = async () => {
+      try {
+        const response = await getTrendingMovies(currentPage);
+        setTrendingMovies(response.results);
+        setTotalPages(response.total_pages);
+        scrollToTop();
+      } catch (error) {
+        console.error('Error while fetching trending movies:', error);
+      }
+    };
+
+    fetchdata();
+  }, [currentPage]);
 
   return (
     <>
