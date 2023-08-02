@@ -1,5 +1,7 @@
 import { CustomContainer } from './Container.styled';
 
-export default function Container({ children }) {
+const Container = ({ children }) => {
   return <CustomContainer>{children}</CustomContainer>;
-}
+};
+
+export default Container;

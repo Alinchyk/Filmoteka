@@ -2,23 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getMoviesByName } from 'components/services/moviesApi';
 import PaginationButtons from 'components/Pagination/Pagination';
-import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {
-  SearchButton,
-  SearchForm,
-  SearchInput,
-  ListLink,
-  Title,
-  Card,
-  Gallery,
-  Poster,
-} from './MoviesSearch.styled';
+import { scrollToTop } from 'components/scroll/scroll';
+import { ListLink, Title, Card, Gallery, Poster } from './MoviesSearch.styled';
+import SearchForm from 'components/SearchForm/SearchForm';
 
 const imgUrl = 'https://image.tmdb.org/t/p/w500';
 
-export default function MoviesSearchFormView() {
+const MoviesSearchFormView = () => {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const location = useLocation();
@@ -27,26 +19,6 @@ export default function MoviesSearchFormView() {
 
   const queryParams = new URLSearchParams(location.search);
   const movieName = queryParams.get('query');
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const query = e.target.movie.value;
-    if (query.trim() === '') {
-      toast.error('Enter the query correctly...', { theme: 'colored' });
-      return;
-    }
-    queryParams.set('query', query);
-    queryParams.delete('page');
-    navigate(`?${queryParams.toString()}`, { replace: true });
-    e.target.movie.value = '';
-  };
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -72,18 +44,7 @@ export default function MoviesSearchFormView() {
 
   return (
     <div>
-      <SearchForm onSubmit={handleSubmit}>
-        <SearchInput
-          type="text"
-          name="movie"
-          placeholder="Enter the movie..."
-          autoComplete="off"
-          defaultValue={movieName}
-        />
-        <SearchButton type="submit" variant="outlined" size="small">
-          Search
-        </SearchButton>
-      </SearchForm>
+      <SearchForm movieName={movieName} queryParams={queryParams} />
 
       <>
         {movieName && (
@@ -113,4 +74,6 @@ export default function MoviesSearchFormView() {
       <ToastContainer autoClose={3000} />
     </div>
   );
-}
+};
+
+export default MoviesSearchFormView;

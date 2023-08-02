@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import Loader from 'components/Loader/Loader';
 import { Header, Navigation, Link, Title } from './MoviesLayout.styled';
 
-export default function MoviesLayout() {
+const MoviesLayout = () => {
   return (
     <Container>
       <Header>
@@ -12,6 +12,9 @@ export default function MoviesLayout() {
           <Navigation>
             <li>
               <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/tvshows">TV shows</Link>
             </li>
             <li>
               <Link to="/movies">Movies</Link>
@@ -26,4 +29,6 @@ export default function MoviesLayout() {
       </Suspense>
     </Container>
   );
-}
+};
+
+export default MoviesLayout;

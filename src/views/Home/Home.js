@@ -2,19 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { getTrendingMovies } from 'components/services/moviesApi';
 import MoviesList from 'components/MoviesList/MoviesList';
 import PaginationButtons from 'components/Pagination/Pagination';
+import { scrollToTop } from 'components/scroll/scroll';
 import { HomeTitle } from './Home.styled';
 
-export default function Home() {
+const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -43,4 +37,6 @@ export default function Home() {
       />
     </>
   );
-}
+};
+
+export default Home;

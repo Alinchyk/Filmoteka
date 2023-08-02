@@ -1,6 +1,6 @@
 import { Section, ReviewsList, Review, ReviewTitle } from './Reviews.styled';
 
-export default function Reviews({ reviews }) {
+const Reviews = ({ reviews }) => {
   if (!reviews) {
     return;
   }
@@ -21,4 +21,6 @@ export default function Reviews({ reviews }) {
       )}
     </Section>
   );
-}
+};
+
+export default Reviews;

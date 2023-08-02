@@ -3,7 +3,7 @@ import { Title, Card, Gallery, Poster } from './MovieList.styled';
 
 const imgUrl = 'https://image.tmdb.org/t/p/w500';
 
-export default function MoviesList({ movies }) {
+const MoviesList = ({ movies }) => {
   const location = useLocation();
 
   return (
@@ -24,4 +24,6 @@ export default function MoviesList({ movies }) {
       )}
     </>
   );
-}
+};
+
+export default MoviesList;

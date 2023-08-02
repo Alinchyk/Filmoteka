@@ -7,9 +7,10 @@ import Loader from 'components/Loader/Loader';
 
 const Home = lazy(() => import('../views/Home/Home'))
 const MoviesSearchView = lazy(() => import('../views/MoviesSearchForm/MoviesSearchView'))
-const MovieDetailsView = lazy(() => import('../views/MovieDetailsView'))
+const MovieDetailsView = lazy(() => import('../views/Details/MovieDetailsView'))
 const CastView = lazy(() => import('../views/CastView'))
 const ReviewsView = lazy(() => import('../views/ReviewsView'))
+const TVshowsView = lazy(() => import('../views/TVshows/TVshowsView'))
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <Route path="/" element={<MoviesLayout />}>
           <Route index element={<Home />} />
 
+          <Route path="tvshows" element={<TVshowsView />} />
           <Route path="movies" element={<MoviesSearchView />} />
           <Route path="movies/:movieId" element={<MovieDetailsView />}>
             <Route path="cast" element={<CastView />} />

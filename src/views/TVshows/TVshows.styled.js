@@ -1,16 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-export const ListLink = styled(Link)`
-  color: black;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 18;
-
-  &:hover {
-    color: #9d0043;
-  }
-`;
 
 export const Title = styled.span`
   display: flex;
@@ -56,4 +44,15 @@ export const Poster = styled.img`
     transform: scale(1.03);
     cursor: pointer;
   }
+`;
+
+export const TVshowTitle = styled.h2`
+  color: black;
+  font-family: 'Droid serif', serif;
+  font-size: 36px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 44px;
+  margin: 0 0 12px;
+  text-align: center;
 `;

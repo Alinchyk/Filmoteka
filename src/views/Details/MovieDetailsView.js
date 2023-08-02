@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getMovieById } from 'components/services/moviesApi';
 import MovieDetails from 'components/MovieDetails/MovieDetails';
 
-export default function MovieDetailsView() {
+const MovieDetailsView = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -21,4 +21,6 @@ export default function MovieDetailsView() {
   }, [movieId]);
 
   return <>{movie && <MovieDetails movie={movie} />}</>;
-}
+};
+
+export default MovieDetailsView;

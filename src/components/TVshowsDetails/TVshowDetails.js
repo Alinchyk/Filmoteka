@@ -1,29 +1,29 @@
+import React from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import {
   Card,
   CardInfo,
   CardImage,
   GoBackLink,
-  MovieLink,
+  TVshowLink,
   CardText,
   CardTitle,
   ElemTitle,
-} from './MovieDetails.styled';
+} from './TVshowsDetails.styled';
 
 const imgUrl = 'https://image.tmdb.org/t/p/w500';
 
-const MovieDetails = ({ movie }) => {
+const TVshowDetails = ({ showData }) => {
   const location = useLocation();
-
-  const { title, poster_path, genres, overview, vote_average } = movie;
+  const { name, poster_path, genres, overview, vote_average } = showData;
 
   return (
     <>
       <GoBackLink to={location.state.from}>Go Back</GoBackLink>
       <Card>
-        <CardImage src={`${imgUrl}${poster_path}`} alt={title} />
+        <CardImage src={`${imgUrl}${poster_path}`} alt={name} />
         <CardInfo>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle>{name}</CardTitle>
 
           <ElemTitle>Rating</ElemTitle>
           <CardText>Rating: {vote_average}</CardText>
@@ -39,16 +39,16 @@ const MovieDetails = ({ movie }) => {
       </Card>
 
       <CardTitle text="Additional information" />
-      <MovieLink to="./cast" state={{ ...location.state }}>
+      <TVshowLink to="./cast" state={{ ...location.state }}>
         Cast
-      </MovieLink>
-      <MovieLink to="./reviews" state={{ ...location.state }}>
+      </TVshowLink>
+      <TVshowLink to="./reviews" state={{ ...location.state }}>
         Reviews
-      </MovieLink>
+      </TVshowLink>
 
       <Outlet />
     </>
   );
 };
 
-export default MovieDetails;
+export default TVshowDetails;

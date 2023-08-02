@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getCastInfo } from 'components/services/moviesApi';
 import Cast from 'components/Cast/Cast';
 
-export default function CastView() {
+const CastView = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState(null);
 
@@ -21,4 +21,6 @@ export default function CastView() {
   }, [movieId]);
 
   return <Cast cast={cast} />;
-}
+};
+
+export default CastView;

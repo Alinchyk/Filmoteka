@@ -3,7 +3,7 @@ import blankImage from './blank_profile.png';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-export default function Cast({ cast }) {
+const Cast = ({ cast }) => {
   if (!cast) {
     return;
   }
@@ -42,4 +42,6 @@ export default function Cast({ cast }) {
       )}
     </Section>
   );
-}
+};
+
+export default Cast;
