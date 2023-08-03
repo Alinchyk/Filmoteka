@@ -14,7 +14,7 @@ const MoviesLayout = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/tvshows">TV shows</Link>
+              <Link to="/tv">TV shows</Link>
             </li>
             <li>
               <Link to="/movies">Movies</Link>

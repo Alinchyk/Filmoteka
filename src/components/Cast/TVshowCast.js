@@ -1,9 +1,9 @@
 import { ListItem, List, Section, CastImg, CastInfo } from './Cast.styled';
-import blankImage from './blank_profile.png';
+import blankImage from '../../img/blank_profile.png';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-const Cast = ({ cast }) => {
+const TVshowCast = ({ cast }) => {
   if (!cast) {
     return;
   }
@@ -38,10 +38,10 @@ const Cast = ({ cast }) => {
           })}
         </List>
       ) : (
-        <p>There is no information about the cast of this film yet.</p>
+        <p>There is no information about the cast of this TV show yet.</p>
       )}
     </Section>
   );
 };
 
-export default Cast;
+export default TVshowCast;

@@ -18,7 +18,7 @@ export const getTVShowById = async showId => {
     const data = await axios
       .get(`/tv/${showId}?api_key=${API_KEY}`)
       .then(res => ({
-        name: res.data.name,
+        title: res.data.title,
         poster_path: res.data.poster_path,
         vote_average: res.data.vote_average,
         overview: res.data.overview,

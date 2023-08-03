@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReviewsInfo } from 'components/services/moviesApi';
-import Reviews from 'components/Reviews/Reviews';
+import MovieReviews from 'components/Reviews/MovieReviews';
 
 const ReviewsView = () => {
   const { movieId } = useParams();
@@ -20,7 +20,7 @@ const ReviewsView = () => {
     fetchData();
   }, [movieId]);
 
-  return <Reviews reviews={reviews} />;
+  return <MovieReviews reviews={reviews} />;
 };
 
 export default ReviewsView;

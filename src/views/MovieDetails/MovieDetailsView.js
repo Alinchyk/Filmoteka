@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieById } from 'components/services/moviesApi';
 import MovieDetails from 'components/MovieDetails/MovieDetails';
+import Loader from 'components/Loader/Loader';
 
 const MovieDetailsView = () => {
   const { movieId } = useParams();
@@ -20,7 +21,9 @@ const MovieDetailsView = () => {
     fetchMovieDetails();
   }, [movieId]);
 
-  return <>{movie && <MovieDetails movie={movie} />}</>;
+  return (
+    <>{movie ? <MovieDetails movie={movie} movieId={movieId} /> : <Loader />}</>
+  );
 };
 
 export default MovieDetailsView;

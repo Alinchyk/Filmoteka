@@ -34,7 +34,7 @@ const TVshowsView = () => {
         <Gallery>
           {data.results.map(({ id, title, poster_path }) => (
             <Card key={id}>
-              <Link to={`tv/${id}`} state={{ from: location.pathname }}>
+              <Link to={`/tv/${id}`} state={{ from: location.pathname }}>
                 <Poster src={`${imgUrl}${poster_path}`} alt={title} />
                 <Title>{title}</Title>
               </Link>

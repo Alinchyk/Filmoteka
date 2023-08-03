@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { scrollToTop } from 'components/scroll/scroll';
 import { ListLink, Title, Card, Gallery, Poster } from './MoviesSearch.styled';
 import SearchForm from 'components/SearchForm/SearchForm';
+import cinemaImage from '../../img/cinemaImage.jpg';
 
 const imgUrl = 'https://image.tmdb.org/t/p/w500';
 
@@ -56,7 +57,12 @@ const MoviesSearchFormView = () => {
                     to={`${id}`}
                     state={{ from: location.pathname + location.search }}
                   >
-                    <Poster src={`${imgUrl}${poster_path}`} alt={title} />
+                    <Poster
+                      src={
+                        poster_path ? `${imgUrl}${poster_path}` : cinemaImage
+                      }
+                      alt={title}
+                    />
                     <Title>{title}</Title>
                   </ListLink>
                 </Card>

@@ -1,6 +1,6 @@
 import { Section, ReviewsList, Review, ReviewTitle } from './Reviews.styled';
 
-const Reviews = ({ reviews }) => {
+const TVshowReviews = ({ reviews }) => {
   if (!reviews) {
     return;
   }
@@ -23,4 +23,4 @@ const Reviews = ({ reviews }) => {
   );
 };
 
-export default Reviews;
+export default TVshowReviews;

@@ -12,9 +12,8 @@ import {
 
 const imgUrl = 'https://image.tmdb.org/t/p/w500';
 
-const MovieDetails = ({ movie }) => {
+const MovieDetails = ({ movie, movieId }) => {
   const location = useLocation();
-
   const { title, poster_path, genres, overview, vote_average } = movie;
 
   return (
@@ -39,10 +38,13 @@ const MovieDetails = ({ movie }) => {
       </Card>
 
       <CardTitle text="Additional information" />
-      <MovieLink to="./cast" state={{ ...location.state }}>
+      <MovieLink to={`/movies/${movieId}/cast`} state={{ ...location.state }}>
         Cast
       </MovieLink>
-      <MovieLink to="./reviews" state={{ ...location.state }}>
+      <MovieLink
+        to={`/movies/${movieId}/reviews`}
+        state={{ ...location.state }}
+      >
         Reviews
       </MovieLink>
 

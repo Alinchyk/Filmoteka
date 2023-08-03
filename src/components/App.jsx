@@ -7,28 +7,36 @@ import Loader from 'components/Loader/Loader';
 
 const Home = lazy(() => import('../views/Home/Home'))
 const MoviesSearchView = lazy(() => import('../views/MoviesSearchForm/MoviesSearchView'))
-const MovieDetailsView = lazy(() => import('../views/Details/MovieDetailsView'))
-const CastView = lazy(() => import('../views/CastView'))
-const ReviewsView = lazy(() => import('../views/ReviewsView'))
+const MovieDetailsView = lazy(() => import('../views/MovieDetails/MovieDetailsView'))
+const MovieCastView = lazy(() => import('../views/MovieDetails/MovieCastView'))
+const MovieReviewsView = lazy(() => import('../views/MovieDetails/MovieReviewsView'))
 const TVshowsView = lazy(() => import('../views/TVshows/TVshowsView'))
+const TVshowDetailsView = lazy(() => import('../views/TVshowDetails/TVshowDetailsView'))
+const TVshowCastView = lazy(() => import('../views/TVshowDetails/TVshowCastView'))
+const TVshowReviewsView = lazy(() => import('../views/TVshowDetails/TVshowReviewsView'))
 
 export default function App() {
   return (
-      <Suspense fallback={<Loader />}>   
-    <Routes>
-      <Route path="/" element={<MoviesLayout />}>
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/" element={<MoviesLayout />}>
           <Route index element={<Home />} />
 
-          <Route path="tvshows" element={<TVshowsView />} />
+          <Route path="tv" element={<TVshowsView />} />
+          <Route path="tv/:showId" element={<TVshowDetailsView />}>
+            <Route path="cast" element={<TVshowCastView />} />
+            <Route path="reviews" element={<TVshowReviewsView />} />
+          </Route>
+
           <Route path="movies" element={<MoviesSearchView />} />
           <Route path="movies/:movieId" element={<MovieDetailsView />}>
-            <Route path="cast" element={<CastView />} />
-            <Route path="reviews" element={<ReviewsView />} />
+            <Route path="cast" element={<MovieCastView />} />
+            <Route path="reviews" element={<MovieReviewsView />} />
           </Route>
-          
+
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-       </Suspense>
+    </Suspense>
   );
 }

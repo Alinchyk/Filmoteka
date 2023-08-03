@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  /* Загальні стилі для кнопок */
   padding: 8px 16px;
   font-size: 16px;
   cursor: pointer;

@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCastInfo } from 'components/services/moviesApi';
-import Cast from 'components/Cast/Cast';
+import { getTVShowCast } from 'components/services/moviesApi';
+import TVShowCast from 'components/Cast/TVshowCast';
 
-const CastView = () => {
-  const { movieId } = useParams();
+const TVshowCastView = () => {
+  const { showId } = useParams();
   const [cast, setCast] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const cast = await getCastInfo(movieId);
+        const cast = await getTVShowCast(showId);
         setCast(cast);
       } catch (error) {
         console.error('Error while fetching cast:', error);
@@ -18,9 +18,9 @@ const CastView = () => {
     };
 
     fetchData();
-  }, [movieId]);
+  }, [showId]);
 
-  return <Cast cast={cast} />;
+  return <TVShowCast cast={cast} />;
 };
 
-export default CastView;
+export default TVshowCastView;

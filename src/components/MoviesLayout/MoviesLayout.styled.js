@@ -41,7 +41,7 @@ export const Title = styled.h1`
   font-weight: 800;
   font-size: 36px;
   color: black;
-  textshadow: 2px 2px 4px white;
+  text-shadow: 2px 2px 4px white;
   padding: 5px;
   margin: 0;
   text-align: center;
